@@ -1,0 +1,87 @@
+.div-container {
+  width: 1000px;
+  padding: 10px;
+  margin: 0 auto;
+  margin-top: 150px;
+}
+
+#container-pai {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#div_titulo,
+#div_descricao,
+#div_deadline {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#grupo_dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#grupo_dropdown > .ui-outputlabel {
+  margin-right: 20px;
+}
+
+#grupo_dropdown > .ui-selectonemenu {
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+#div_titulo > .ui-outputlabel,
+#div_descricao > .ui-outputlabel,
+#div_deadline > .ui-outputlabel {
+  margin-right: 10px;
+  width: 100px;
+  text-align: right;
+}
+
+#div_titulo > .ui-inputfield,
+#div_descricao > .ui-inputfield {
+  flex-grow: 1;
+}
+
+#id_botao {
+  display: flex;
+  justify-content: center;
+}
+
+/* Estilos adicionais para tornar o visual mais atraente */
+body {
+  background-color: #f2f2f2;
+}
+
+.div-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#div_titulo > .ui-inputfield,
+#div_descricao > .ui-inputfield,
+#div_deadline > .ui-inputfield {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#id_botao > .ui-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#id_botao > .ui-button:hover {
+  background-color: #0056b3;
+}

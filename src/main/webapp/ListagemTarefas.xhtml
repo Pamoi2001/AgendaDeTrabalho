@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+<h:head>
+	<title>Listagem de Tarefa</title>
+	<link rel="stylesheet" type="text/css" href="css/stylesList.css" />
+</h:head>
+
+<h:body>
+	<div class="div-container">
+		<h:form>
+			<p:panel id="container-pai" header="Listagem de Tarefas">
+
+				<div id="div_numero">
+					<p:outputLabel for="numero" value="Número:" />
+					<p:inputText id="numero" value="#{atividadeBean.numero}" />
+				</div>
+
+				<div id="div_titu_desc">
+					<p:outputLabel for="titudesc" value="Título/Descrição:" />
+					<p:inputTextarea id="titudesc" value="#{atividadeBean.titulo}" />
+				</div>
+
+				<div class="gp_drop">
+					<div id="drop_responsavel">
+						<p:outputLabel for="responsavel" value="Responsável:" />
+						<p:selectOneMenu id="responsavel"
+							value="#{atividadeBean.responsavel}">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItems value="#{atividadeBean.responsaveis}"
+								var="responsavelTarefa"
+								itemLabel="#{responsavelAtividade.responsavel}"
+								itemValue="#{responsavelAtividade}" />
+						</p:selectOneMenu>
+					</div>
+
+					<div id="drop_situacao">
+						<p:outputLabel for="situacao" value="Situação:" />
+						<p:selectOneMenu id="situacao" value="#{atividadeBean.situacao}">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItems value="#{atividadeBean.situacoes}"
+								var="situacaoAtividade" 
+								itemLabel="#{situacaoAtividade.situacao}"
+								itemValue="#{situacaoAtividade}" />
+						</p:selectOneMenu>
+					</div>
+
+					<div id="id_botao">
+						<p:commandButton value="Buscar Tarefas"
+							action="#{atividadeBean.listarAgAtividades()}" ajax="false" />
+					</div>
+				</div>
+				<br></br>
+				<div class="scrollable-table"
+					style="display: flex; justify-content: center; align-items: center;">
+					<p:dataTable value="#{atividadeBean.agAtividades}" var="atividade"
+						style="text-align: center;">
+						<p:column headerText="Número" style="text-align: center;">
+							<h:outputText value="#{atividade.numero}" />
+						</p:column>
+						<p:column headerText="Título" style="text-align: center;">
+							<h:outputText value="#{atividade.titulo}" />
+						</p:column>
+						<p:column headerText="Responsável" style="text-align: center;">
+							<h:outputText value="#{atividade.responsavel}" />
+						</p:column>
+						<p:column headerText="Ações" style="text-align: center;">
+							<p:commandButton icon="pi pi-pencil" title="Editar"
+								oncomplete="PF('editDialogWidget').show();"
+								action="#{atividadeBean.abrirDialogEditarAgAtividade(atividade)}" />
+							<p:spacer width="10" />
+							<p:commandButton icon="pi pi-trash" title="Excluir"
+								style="background-color: red; color: white;"
+								action="#{atividadeBean.excluirAgAtividade(atividade)}" ajax="false" />
+							<p:spacer width="10" />
+							<p:commandButton icon="pi pi-check" title="Concluir"
+								style="background-color: green; color: white;"
+								action="#{atividadeBean.concluirAgAtividade(atividade)}" ajax="false" />
+						</p:column>
+
+
+					</p:dataTable>
+
+					<p:dialog id="dialogEditar" header="Editar Tarefa"
+						widgetVar="editDialogWidget">
+						<p:panelGrid columns="2">
+
+							<p:outputLabel for="diag_titulo" value="Título:" />
+							<p:inputText id="diag_titulo" value="#{atividadeBean.agAtividade.titulo}" />
+
+
+							<p:outputLabel for="diag_descricao" value="Descrição:" />
+							<p:inputTextarea id="diag_descricao"
+								value="#{atividadeBean.agAtividade.descricao}" />
+
+							<p:outputLabel for="diag_responsavel" value="Responsável:" />
+							<p:selectOneMenu id="diag_responsavel"
+								value="#{atividadeBean.agAtividade.responsavel}">
+								<f:selectItem itemLabel="Selecione" itemValue="" />
+								<f:selectItems value="#{atividadeBean.responsaveis}"
+									var="responsavelAtividade"
+									itemLabel="#{responsavelAtividade.responsavel}"
+									itemValue="#{responsavelAtividade}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel for="diag_prioridade" value="Prioridade:" />
+							<p:selectOneMenu id="diag_prioridade"
+								value="#{atividadeBean.agAtividade.prioridade}">
+								<f:selectItem itemLabel="Selecione" itemValue="" />
+								<f:selectItems value="#{atividadeBean.prioridades}"
+									var="prioridadeAtividade"
+									itemLabel="#{prioridadeAtividade.prioridade}"
+									itemValue="#{prioridadeAtividade}" />
+							</p:selectOneMenu>
+
+							<p:outputLabel for="diag_deadline" value="Deadline:" />
+							<p:calendar id="diag_deadline" showOn="button"
+								value="#{atividadeBean.agAtividade.deadline}" pattern="dd/MM/yyyy" />
+
+							<p:commandButton value="Salvar"
+								actionListener="#{atividadeBean.salvarEdicaoAgAtividade}" ajax="false"
+								oncomplete="PF('editDialogWidget').hide();" />
+							<p:commandButton value="Cancelar"
+								onclick="PF('editDialogWidget').hide();" />
+						</p:panelGrid>
+					</p:dialog>
+				</div>
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					sticky="false" closable="true" />
+			</p:panel>
+		</h:form>
+	</div>
+</h:body>
+</html>

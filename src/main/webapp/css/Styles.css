@@ -1,0 +1,37 @@
+.div-container {
+	width: 1000px;
+	padding: 20px;
+}
+
+#container-pai {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+#div_titulo,
+#div_descricao {
+	margin-bottom: 20px;
+}
+
+#div_titulo > .ui-outputlabel {
+	margin-right: 10px;
+}
+
+#div_descricao > .ui-outputlabel {
+	margin-right: 10px;
+}
+
+#grupo_dropdown {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+#grupo_dropdown > .ui-outputlabel {
+	margin-right: 10px;
+}
+
+#id_botao {
+	margin-top: 20px;
+}
